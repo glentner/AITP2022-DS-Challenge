@@ -33,12 +33,12 @@ def parseFile(queue, path, year):
             
             nameSplit = str(df["NAME"][0]).split(",")
             
-            if len(nameSplit) > 1:
-                print(nameSplit)
+            # if len(nameSplit) > 1:
+            #     print(nameSplit)
                 
-                if "AY" == nameSplit[1]:
-                    print(df)
-                    tar.extract(csv_file, path="parsed/{}".format(year))
+            #     if "AY" == nameSplit[1]:
+            print(df)
+            tar.extract(csv_file, path="parsed/{}/".format(year))
             
     queue.put("{} Fully complete".format(path))
 
@@ -58,6 +58,9 @@ def main():
         
         if int(year) > 1957:
             print("Parsing year: {}".format(year))
+            
+            if(not os.path.exists("parsed/{}".format(year))):
+                os.mkdir("parsed/{}".format(year))
             
             p = mp.Process(target=parseFile, args=(q, fullPath, year))
             p.start()
