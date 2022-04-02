@@ -1,8 +1,8 @@
 ### Plan
 My goal is to extract all the data labled for Antarctica from years 1973 onwards
 
-#### Why 1973?
-NOAA in their readme says data from 1973 to the present is typically the most complete, this means we have the lowest likelihood of missing data.
+#### Why 1957?
+NOAA in their readme says data from 1957 to the present is when Antartica data started
 
 #### What are we extracting?
 Station number
