@@ -29,7 +29,7 @@ def main():
             
             
     for key in list(stations.keys()):
-        df = pd.concat(stations[key])
+        df = pd.concat(stations[key], ignore_index=True)
         
         df.to_csv("combined/{}".format(key))
 

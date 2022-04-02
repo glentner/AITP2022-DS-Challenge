@@ -32,7 +32,9 @@ def isOutlier(date, lastDate, nextDate):
 def main():
     outliers = 0
     input = "combined/"
-
+    
+    dataframes = []
+    
     directories = os.listdir(input)
     
     for station in directories:
@@ -41,18 +43,17 @@ def main():
         
         df = pd.read_csv(path)
         
-        dates = df["DATE"]
+        dataframes.append(df)
         
-        oldDate = getDate(dates[0])
+        # combinedData = pd.concat(dataframes)
+
+        maxtempMax = df["MAX"].idxmax()
+        mintempMax = df["MIN"].idxmax()
+        avgtempMax = df["TEMP"].idxmax()
         
-        for i in dates[1:-1].index:
-            if(isOutlier(dates[i], dates[i - 1], dates[i + 1])):
-                print(dates[i], dates[i - 1], dates[i + 1])
-                outliers += 1
-                df = df.drop(i)
-                
-        df.to_csv(path)
-            # oldDate = getDate(date)'
+        print(maxtempMax, mintempMax, avgtempMax)
+        
+        print(df["MAX"][maxtempMax], df["MIN"][mintempMax], df["TEMP"][avgtempMax])
             
     print(outliers)
             
