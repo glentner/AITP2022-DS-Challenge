@@ -11,19 +11,24 @@ def getDate(dateString):
 
 def main():
     # outliers = 0
-    input = "combined/"
+    inputFolder = "combined/"
 
-    directories = os.listdir(input)
+    directories = os.listdir(inputFolder)
+    minDate = getDate('2020-01-01')
     
     for station in directories:
         
-        path = os.path.join(input, station)
+        path = os.path.join(inputFolder, station)
         
         df = pd.read_csv(path)
         
         df["DATE"] = pd.to_datetime(df["DATE"], format='%Y-%m-%d')
-        df.set_index(['DATE'],inplace=True)
-        df.plot()
+        res = df[~(df['DATE'] < minDate)]
+        # df.set_index(['DATE'],inplace=True)
+        res.plot(x = "DATE", y = "TEMP")
+        
+        
+        # a = input()
         
         print(df.head(10))
         
@@ -32,6 +37,7 @@ def main():
         # df.to_csv(path)
             
     # print(outliers)
+    plt.show()
             
     return 0
         
