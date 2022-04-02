@@ -23,9 +23,10 @@ def main():
         df = pd.read_csv(path)
         
         df["DATE"] = pd.to_datetime(df["DATE"], format='%Y-%m-%d')
-        res = df[~(df['DATE'] < minDate)]
+        # df = df[(df['DATE'] > minDate)]
+        df = df[(df['DATE'].month == 3)]
         # df.set_index(['DATE'],inplace=True)
-        res.plot(x = "DATE", y = "TEMP")
+        df.plot(x = "DATE", y = "TEMP")
         
         
         # a = input()
